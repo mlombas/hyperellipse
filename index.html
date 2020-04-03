@@ -1,2 +1,42 @@
 <html>
+   <head>
+      <script src="canvas_coordinates.js"></script>
+      <script src="points.js"></script>
+      <script src="drawing.js"></script>
+   </head>
+   <body>
+      <canvas width=400 height=400 style="border: solid black 5px"></canvas>
+      <div id="input">
+         <p id="distance-p">Distance: 0</p>
+         <input id="distance-in" type="range" min="0" max="2000" value="0">
+         <p>Color:</p>
+         <input id="color-in" type="text" value="black">
+         </p><button id="stroke">Paint</button></p>
+      </div>
+      <script>
+         let canvas = document.querySelector("canvas");
+         let listener = new CanvasMouseListener(canvas);
+         let drawer = new Drawer(canvas);
+
+         listener.addLeftClickHandler(coords => drawer.add(coords));
+
+         let p = document.querySelector("#distance-p");
+         let input = document.querySelector("#distance-in");
+         input.addEventListener("mousemove", 
+            value => p.innerText = `Distance: ${input.value}`
+         );
+         
+         let colorInput = document.querySelector("#color-in");
+         colorInput.addEventListener("change", 
+            () => drawer.setColor(colorInput.value)
+         );
+
+         let distanceInput = document.querySelector("#distance-in");
+         let but = document.querySelector("#stroke");
+         but.addEventListener("click", () => {
+            let distance = parseInt(distanceInput.value);
+            drawer.stroke(distance);
+         });
+      </script>
+   </body>
 </html>

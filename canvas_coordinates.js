@@ -13,7 +13,7 @@ class CanvasMouseListener {
    }
 
    _handleRaw(evt) {
-      var coordinates = this._getCoordinates(evt);
+      let coordinates = this._getCoordinates(evt);
 
       switch(evt.button) {
          case 0: this._handleLeft(coordinates, evt); break;
@@ -23,11 +23,11 @@ class CanvasMouseListener {
    }
 
    _getCoordinates(evt) {
-      var rect = this.canvas.getBoundingClientRect();
-      var style = getComputedStyle(canvas).getPropertyValue("border-width");
-      var borderWidths = parseInt(style.substring(0, style.length - 2));
+      let rect = this.canvas.getBoundingClientRect();
+      let style = getComputedStyle(canvas).getPropertyValue("border-width");
+      let borderWidths = parseInt(style.substring(0, style.length - 2));
 
-      return coordinates = {
+      return {
          x: evt.clientX - rect.left - borderWidths,
          y: evt.clientY - rect.top - borderWidths
       };
@@ -54,6 +54,6 @@ class CanvasMouseListener {
    }
 
    addMiddleClickHandler(func) {
-      this.handlers.right.push(func);
+      this.handlers.middle.push(func);
    }
 }
